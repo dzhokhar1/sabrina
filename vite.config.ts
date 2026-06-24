@@ -5,8 +5,8 @@ import tailwindcss from "@tailwindcss/vite"
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
-  // На GitHub Pages сайт живёт по пути /cerveau/, локально — в корне.
-  base: command === "build" ? "/cerveau/" : "/",
+  // На GitHub Pages сайт живёт по пути /sabrina/, локально — в корне.
+  base: command === "build" ? "/sabrina/" : "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
