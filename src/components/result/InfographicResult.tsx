@@ -1,6 +1,12 @@
+import { useRef } from "react"
+import { Download } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
 interface InfographicResultProps {
   lectureTitle: string
 }
+
+const SVG_VARS = ["--visual", "--visual-tint", "--ink", "--ink-muted", "--card"]
 
 const SATELLITES = [
   { x: 70, y: 70, title: "Понятие", sub: "что это и зачем", anchor: "start" as const },
@@ -13,18 +19,46 @@ const CENTER = { x: 380, y: 215 }
 
 /** Результат для визуала: наглядная схема-карта темы. */
 export function InfographicResult({ lectureTitle }: InfographicResultProps) {
+  const svgRef = useRef<SVGSVGElement>(null)
+
+  function handleDownload() {
+    const svg = svgRef.current
+    if (!svg) return
+    const cs = getComputedStyle(document.documentElement)
+    let data = new XMLSerializer().serializeToString(svg)
+    // Заменяем CSS-переменные на реальные цвета — чтобы файл открывался где угодно
+    for (const v of SVG_VARS) {
+      data = data.split(`var(${v})`).join(cs.getPropertyValue(v).trim() || "#14213d")
+    }
+    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${data}`], {
+      type: "image/svg+xml;charset=utf-8",
+    })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `cerveau-${lectureTitle}.svg`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="overflow-hidden rounded-2xl border border-visual/25 bg-card">
-        <div className="border-b border-hairline bg-visual-tint/40 px-6 py-5">
-          <p className="eyebrow text-visual">Инфографика</p>
-          <h3 className="mt-1.5 font-serif text-2xl font-semibold text-ink">
-            «{lectureTitle}» на одной схеме
-          </h3>
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-hairline bg-visual-tint/40 px-6 py-5">
+          <div>
+            <p className="eyebrow text-visual">Инфографика</p>
+            <h3 className="mt-1.5 font-serif text-2xl font-semibold text-ink">
+              «{lectureTitle}» на одной схеме
+            </h3>
+          </div>
+          <Button variant="outline" size="sm" onClick={handleDownload} className="shrink-0">
+            <Download className="size-4" /> Скачать SVG
+          </Button>
         </div>
 
         <div className="p-4 sm:p-6">
           <svg
+            ref={svgRef}
             viewBox="0 0 760 440"
             className="h-auto w-full"
             style={{ fontFamily: "var(--font-sans)" }}

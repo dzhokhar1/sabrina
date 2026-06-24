@@ -27,6 +27,9 @@ const CoursePage = lazy(() =>
 const LecturePage = lazy(() =>
   import("@/pages/LecturePage").then((m) => ({ default: m.LecturePage })),
 )
+const CertificatePage = lazy(() =>
+  import("@/pages/CertificatePage").then((m) => ({ default: m.CertificatePage })),
+)
 const UploadPage = lazy(() =>
   import("@/pages/UploadPage").then((m) => ({ default: m.UploadPage })),
 )
@@ -57,6 +60,7 @@ export const router = createHashRouter([
           { path: "library", element: <LibraryPage /> },
           { path: "course/:courseId", element: <CoursePage /> },
           { path: "course/:courseId/lecture/:lectureId", element: <LecturePage /> },
+          { path: "course/:courseId/certificate", element: <CertificatePage /> },
           { path: "upload", element: <UploadPage /> },
           { path: "profile", element: <ProfilePage /> },
         ],

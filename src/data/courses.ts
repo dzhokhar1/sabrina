@@ -1,4 +1,11 @@
-import { BrainCircuit, Code2, Languages, type LucideIcon } from "lucide-react"
+import {
+  BrainCircuit,
+  Code2,
+  Languages,
+  Palette,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react"
 
 export interface Lecture {
   id: string
@@ -96,6 +103,52 @@ export const courses: Course[] = [
         title: "Лекция 2. Сильный аргумент",
         summary: "Из чего складывается убедительный довод.",
         duration: "20 мин",
+      },
+    ],
+  },
+  {
+    id: "design",
+    title: "Дизайн интерфейсов",
+    subtitle: "Основы для начинающих",
+    description:
+      "Курс о том, как делать понятные и красивые экраны: иерархия, типографика, цвет и сетки — без воды и сразу на примерах.",
+    tag: "Дизайн",
+    icon: Palette,
+    lectures: [
+      {
+        id: "hierarchy",
+        title: "Лекция 1. Иерархия",
+        summary: "Как направлять внимание пользователя.",
+        duration: "15 мин",
+      },
+      {
+        id: "type-color",
+        title: "Лекция 2. Шрифт и цвет",
+        summary: "Базовые правила типографики и палитры.",
+        duration: "18 мин",
+      },
+    ],
+  },
+  {
+    id: "finance",
+    title: "Личные финансы",
+    subtitle: "Деньги под контролем",
+    description:
+      "Практический курс о бюджете, подушке безопасности и первых инвестициях — простыми словами и с расчётами на каждый день.",
+    tag: "Финансы",
+    icon: Wallet,
+    lectures: [
+      {
+        id: "budget",
+        title: "Лекция 1. Бюджет",
+        summary: "Куда уходят деньги и как это увидеть.",
+        duration: "16 мин",
+      },
+      {
+        id: "cushion",
+        title: "Лекция 2. Подушка безопасности",
+        summary: "Сколько откладывать и зачем.",
+        duration: "14 мин",
       },
     ],
   },

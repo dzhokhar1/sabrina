@@ -1,5 +1,9 @@
 # Cerveau — прототип
 
+[![Deploy to GitHub Pages](https://github.com/dzhokhar1/sabrina/actions/workflows/deploy.yml/badge.svg)](https://github.com/dzhokhar1/sabrina/actions/workflows/deploy.yml)
+
+🔗 **Живой сайт:** https://dzhokhar1.github.io/sabrina/
+
 Демонстрационный макет платформы персонализированного обучения. Человек
 проходит «тест» на тип восприятия (Визуал / Аудиал / Кинестетик) и получает
 лекцию в подходящем формате: инфографика, аудио или интерактивные задания.

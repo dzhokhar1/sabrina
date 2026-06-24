@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom"
-import { ArrowLeft, ArrowRight, Check, Clock } from "lucide-react"
+import { ArrowLeft, ArrowRight, Award, Check, Clock } from "lucide-react"
 import { getCourse } from "@/data/courses"
 import { PERCEPTION } from "@/data/perception"
 import { useUser } from "@/context/UserContext"
@@ -18,6 +18,7 @@ export function CoursePage() {
 
   const meta = PERCEPTION[user.perceptionType]
   const Icon = course.icon
+  const finished = course.lectures.every((l) => isComplete(course.id, l.id))
 
   return (
     <div className="flex flex-col gap-10">
@@ -50,6 +51,26 @@ export function CoursePage() {
         <PerceptionBadge type={user.perceptionType} />
         — каждую лекцию выдадим как {meta.formatNoun}.
       </div>
+
+      {finished && (
+        <div className="flex flex-col gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Award className="size-5" strokeWidth={1.75} />
+            </span>
+            <div>
+              <p className="font-serif text-lg font-semibold text-ink">Курс пройден!</p>
+              <p className="text-sm text-ink-muted">Заберите сертификат о прохождении.</p>
+            </div>
+          </div>
+          <Button asChild className="shrink-0">
+            <Link to={`/app/course/${course.id}/certificate`}>
+              Получить сертификат
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      )}
 
       <div className="flex flex-col gap-3">
         <span className="eyebrow">Лекции курса</span>

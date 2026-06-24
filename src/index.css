@@ -191,3 +191,18 @@
         scroll-behavior: auto !important;
     }
 }
+
+/* Печать: оставляем только содержимое (для сертификата) */
+@media print {
+    header,
+    footer,
+    .no-print {
+        display: none !important;
+    }
+    .paper-noise::before {
+        display: none !important;
+    }
+    body {
+        background: #fff;
+    }
+}

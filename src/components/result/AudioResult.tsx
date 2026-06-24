@@ -1,8 +1,12 @@
+import { Download } from "lucide-react"
 import { AudioPlayer } from "@/components/media/AudioPlayer"
+import { Button } from "@/components/ui/button"
 
 interface AudioResultProps {
   lectureTitle: string
 }
+
+const AUDIO_SRC = `${import.meta.env.BASE_URL}demo/lecture-audio.m4a`
 
 const HIGHLIGHTS = [
   "Спокойный голос и выверенный темп",
@@ -25,7 +29,15 @@ export function AudioResult({ lectureTitle }: AudioResultProps) {
         </p>
 
         <div className="mt-6">
-          <AudioPlayer src={`${import.meta.env.BASE_URL}demo/lecture-audio.m4a`} />
+          <AudioPlayer src={AUDIO_SRC} />
+        </div>
+
+        <div className="mt-4">
+          <Button asChild variant="outline" size="sm">
+            <a href={AUDIO_SRC} download="cerveau-lecture.m4a">
+              <Download className="size-4" /> Скачать аудио
+            </a>
+          </Button>
         </div>
       </div>
 
